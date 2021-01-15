@@ -210,8 +210,13 @@ async function GETRequestToCloudUserEndpoint (provider) {
             .appendElement('message', '', 'OK')
         }).appendElement('data', '', (data) => {
           data.appendElement('id', '', 'admin')
-          data.appendElement('display-name', '', 'admin')
-          data.appendElement('email', '', '')
+          data.appendElement('display-name', '', MatchersV3.string('admin'))
+          data.appendElement(
+            'email',
+            '',
+            MatchersV3.regex(/((^(?![\s\S]))|(\w+@\w+\.\w+))/, 'admin@example.com')
+            // empty string or email
+          )
         })
       })
     })
